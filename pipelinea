@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    environment {
+      PATH = "/usr/local/bin:$PATH"
+    }
+  stages {
+    stage ('Prepare') {
+      steps {
+        checkout scm
+      }
+    }
+    stage ('Build') {
+       steps {
+        script {
+          sh "docker build -t master:${env.BUILD_ID} ."
+               }
+            }
+        }
+     }
+  }
